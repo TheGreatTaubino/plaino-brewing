@@ -1,0 +1,270 @@
+/* Plain-O Brewing — Minimalist Style */
+
+:root {
+  --bg: #f5f4f0;
+  --text: #1a1a1a;
+  --muted: #888;
+  --border: #ddd;
+  --accent: #1a1a1a;
+  --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER / NAV */
+header {
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.logo-wordmark {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.logo-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+nav a:hover, nav a.active {
+  color: var(--text);
+}
+
+/* MAIN */
+main {
+  flex: 1;
+}
+
+/* HERO */
+.hero {
+  padding: 8rem 3rem 6rem;
+  max-width: 680px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 420px;
+}
+
+.hero-cta {
+  margin-top: 2.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* COLOR SWATCH ROW (homepage preview) */
+.color-row {
+  display: flex;
+  gap: 0;
+  height: 6px;
+  margin: 0 3rem 6rem;
+}
+
+.color-row span {
+  flex: 1;
+}
+
+/* SECTION */
+section {
+  padding: 5rem 3rem;
+  border-top: 1px solid var(--border);
+}
+
+section h2 {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+/* TAPLIST */
+.taplist {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tap-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tap-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tap-info h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tap-info p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.tap-abv {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ABOUT */
+.about-text {
+  max-width: 580px;
+}
+
+.about-text p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-text p strong {
+  color: var(--text);
+}
+
+/* LOCATION / CONTACT */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+}
+
+.info-block h3 {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.info-block p, .info-block a {
+  font-size: 0.95rem;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.8;
+}
+
+.info-block a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+
+  nav { gap: 1.5rem; }
+
+  .hero { padding: 4rem 1.5rem 3rem; }
+  .color-row { margin: 0 1.5rem 4rem; }
+  section { padding: 3rem 1.5rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+
+  .tap-item {
+    grid-template-columns: 36px 1fr;
+  }
+  .tap-abv { display: none; }
+}
