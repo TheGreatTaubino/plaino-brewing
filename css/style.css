@@ -32,7 +32,7 @@ body {
 
 /* HEADER / NAV */
 header {
-  padding: 2rem 3rem;
+  padding: 1.25rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,24 +40,32 @@ header {
 }
 
 .logo {
-  display: flex;
-  flex-direction: column;
+  display: block;
   text-decoration: none;
-  color: var(--text);
+  line-height: 0;
 }
 
-.logo-wordmark {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+/* Logo image — CSS-cropped to blue variant (bottom-left quadrant of 2x2 sheet) */
+.logo-img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  background-image: url('../Plainobrewing_logo.png');
+  background-size: 200% 200%;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
 }
 
-.logo-sub {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--muted);
+/* Larger version for homepage hero */
+.logo-hero {
+  display: block;
+  width: 180px;
+  height: 180px;
+  background-image: url('Plainobrewing_logo.png');
+  background-size: 200% 200%;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
 }
 
 nav {
@@ -85,8 +93,14 @@ main {
 
 /* HERO */
 .hero {
-  padding: 8rem 3rem 6rem;
-  max-width: 680px;
+  padding: 6rem 3rem 5rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.hero-text {
+  max-width: 520px;
 }
 
 .hero h1 {
@@ -258,7 +272,8 @@ footer {
 
   nav { gap: 1.5rem; }
 
-  .hero { padding: 4rem 1.5rem 3rem; }
+  .hero { padding: 3rem 1.5rem 2.5rem; flex-direction: column; gap: 2rem; align-items: flex-start; }
+  .logo-hero { width: 120px; height: 120px; }
   .color-row { margin: 0 1.5rem 4rem; }
   section { padding: 3rem 1.5rem; }
   footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
