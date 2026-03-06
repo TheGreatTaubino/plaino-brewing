@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Plain-O Brewing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/calendar.css" />
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" class="logo">
+      <span class="logo-wordmark">Plain-O</span>
+      <span class="logo-sub">Brewing Co.</span>
+    </a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="taplist.html">Taplist</a>
+      <a href="events.html">Events</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Events</h2>
+
+      <div class="calendar-wrap">
+
+        <!-- Month navigation -->
+        <div class="cal-header">
+          <button class="cal-nav" id="cal-prev" aria-label="Previous month">&#8592;</button>
+          <span id="cal-month-label"></span>
+          <button class="cal-nav" id="cal-next" aria-label="Next month">&#8594;</button>
+        </div>
+
+        <!-- Calendar grid -->
+        <div class="cal-grid" id="cal-grid"></div>
+
+        <!-- Tag legend -->
+        <div class="cal-legend">
+          <span><i style="background:#3b5fa0;"></i> Live Music</span>
+          <span><i style="background:#4a8c5c;"></i> Trivia</span>
+          <span><i style="background:#c0392b;"></i> Special</span>
+          <span><i style="background:#8b5e9e;"></i> Tasting</span>
+          <span><i style="background:#b0a090;"></i> Private</span>
+        </div>
+
+      </div>
+
+      <!-- Upcoming events list -->
+      <div id="events-list" class="events-list"></div>
+
+    </section>
+  </main>
+
+  <footer>
+    <span>Plain-O Brewing Co.</span>
+    <span>Drink simple.</span>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/events-data.js"></script>
+  <script src="../js/calendar.js"></script>
+</body>
+</html>
