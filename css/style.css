@@ -39,7 +39,7 @@ header {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(14, 14, 14, 0.92);
+  background: rgba(46, 46, 46, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 100;
@@ -154,7 +154,7 @@ main {
 .btn {
   display: inline-block;
   padding: 0.8rem 2.2rem;
-  border: 1px solid #333;
+  border: 1px solid var(--border);
   color: var(--text);
   background: transparent;
   text-decoration: none;
@@ -319,30 +319,97 @@ footer {
   text-transform: uppercase;
 }
 
+/* HAMBURGER BUTTON — hidden on desktop */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+/* Animated X when open */
+header.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+header.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+header.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
 /* RESPONSIVE */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   header {
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    align-items: flex-start;
+    padding: 1.25rem 1.5rem;
+    position: relative; /* for dropdown positioning */
   }
 
-  nav { gap: 1.5rem; }
+  .nav-toggle {
+    display: flex;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex-direction: column;
+    gap: 0;
+    z-index: 99;
+  }
+
+  header.nav-open nav {
+    display: flex;
+  }
+
+  nav a {
+    padding: 0.85rem 0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  nav a::after {
+    display: none; /* no underline animation in mobile menu */
+  }
 
   .hero {
-    padding: 3.5rem 1.5rem 2.5rem;
+    padding: 3rem 1.5rem 2.5rem;
     flex-direction: column;
     gap: 2rem;
     align-items: flex-start;
   }
 
   .logo-hero { width: 120px; height: 120px; }
-  .color-row { margin: 0 1.5rem 4rem; }
+  .color-row { margin: 0 1.5rem 3.5rem; }
   section { padding: 3rem 1.5rem; }
 
   footer {
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
@@ -354,4 +421,13 @@ footer {
   }
 
   .tap-abv { display: none; }
+
+  .btn {
+    padding: 1rem 2rem; /* bigger touch target */
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
 }
