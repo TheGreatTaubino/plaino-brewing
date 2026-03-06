@@ -32,7 +32,7 @@ body {
 
 /* HEADER / NAV */
 header {
-  padding: 1.25rem 3rem;
+  padding: 2rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,23 +40,27 @@ header {
 }
 
 .logo {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  line-height: 0;
+  color: var(--text);
 }
 
-/* Logo image — CSS-cropped to blue variant (bottom-left quadrant of 2x2 sheet) */
-.logo-img {
-  display: block;
-  width: 64px;
-  height: 64px;
-  background-image: url('../Plainobrewing_logo.png');
-  background-size: 200% 200%;
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
+.logo-wordmark {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
-/* Larger version for homepage hero */
+.logo-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Larger logo for homepage hero */
 .logo-hero {
   display: block;
   width: 180px;
