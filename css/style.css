@@ -1,11 +1,11 @@
 /* Plain-O Brewing — Dark Minimalist */
 
 :root {
-  --bg: #0e0e0e;
-  --surface: #161616;
+  --bg: #1e1e1e;
+  --surface: #282828;
   --text: #e8e6e0;
-  --muted: #4a4a4a;
-  --border: #1e1e1e;
+  --muted: #686868;
+  --border: #303030;
   --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
