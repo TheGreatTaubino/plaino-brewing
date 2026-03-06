@@ -1,11 +1,11 @@
-/* Plain-O Brewing — Minimalist Style */
+/* Plain-O Brewing — Dark Minimalist */
 
 :root {
-  --bg: #f5f4f0;
-  --text: #1a1a1a;
-  --muted: #888;
-  --border: #ddd;
-  --accent: #1a1a1a;
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --text: #e8e6e0;
+  --muted: #4a4a4a;
+  --border: #1e1e1e;
   --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -32,11 +32,17 @@ body {
 
 /* HEADER / NAV */
 header {
-  padding: 2rem 3rem;
+  padding: 1.75rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: rgba(14, 14, 14, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
 }
 
 .logo {
@@ -54,8 +60,8 @@ header {
 }
 
 .logo-sub {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -80,14 +86,33 @@ nav {
 nav a {
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: color 0.2s;
+  position: relative;
+  padding-bottom: 2px;
 }
 
-nav a:hover, nav a.active {
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text);
+  transition: width 0.25s ease;
+}
+
+nav a:hover,
+nav a.active {
   color: var(--text);
+}
+
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
 }
 
 /* MAIN */
@@ -97,7 +122,7 @@ main {
 
 /* HERO */
 .hero {
-  padding: 6rem 3rem 5rem;
+  padding: 7rem 3rem 5rem;
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -108,17 +133,18 @@ main {
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--muted);
-  max-width: 420px;
+  max-width: 400px;
+  line-height: 1.75;
 }
 
 .hero-cta {
@@ -127,31 +153,45 @@ main {
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 2rem;
-  border: 1px solid var(--text);
+  padding: 0.8rem 2.2rem;
+  border: 1px solid #333;
   color: var(--text);
+  background: transparent;
   text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 
 .btn:hover {
   background: var(--text);
   color: var(--bg);
+  border-color: var(--text);
 }
 
-/* COLOR SWATCH ROW (homepage preview) */
+/* COLOR SWATCH ROW (homepage) */
 .color-row {
   display: flex;
   gap: 0;
-  height: 6px;
+  height: 3px;
   margin: 0 3rem 6rem;
+  opacity: 0.7;
 }
 
 .color-row span {
   flex: 1;
+  transition: opacity 0.2s;
+}
+
+.color-row:hover span {
+  opacity: 0.4;
+}
+
+.color-row span:hover {
+  opacity: 1 !important;
+  flex: 2;
+  transition: flex 0.3s ease, opacity 0.2s;
 }
 
 /* SECTION */
@@ -161,8 +201,8 @@ section {
 }
 
 section h2 {
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 3rem;
@@ -172,42 +212,53 @@ section h2 {
 .taplist {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .tap-item {
   display: grid;
-  grid-template-columns: 48px 1fr auto;
+  grid-template-columns: 52px 1fr auto;
   align-items: center;
   gap: 2rem;
-  padding: 1.5rem 0;
+  padding: 1.6rem 1rem;
   border-bottom: 1px solid var(--border);
+  border-radius: 4px;
+  transition: background 0.2s;
+  cursor: default;
+  box-shadow: inset 3px 0 0 transparent;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.tap-item:hover {
+  background: var(--surface);
+  box-shadow: inset 3px 0 0 var(--tap-color, var(--border));
 }
 
 .tap-swatch {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: 0 0 12px -2px var(--tap-color, transparent);
 }
 
 .tap-info h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .tap-info p {
   font-size: 0.8rem;
   color: var(--muted);
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
+  line-height: 1.5;
 }
 
 .tap-abv {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   white-space: nowrap;
 }
 
@@ -219,12 +270,13 @@ section h2 {
 .about-text p {
   font-size: 1.05rem;
   color: var(--muted);
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
+  margin-bottom: 1.75rem;
+  line-height: 1.85;
 }
 
 .about-text p strong {
   color: var(--text);
+  font-weight: 500;
 }
 
 /* LOCATION / CONTACT */
@@ -235,22 +287,23 @@ section h2 {
 }
 
 .info-block h3 {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
-.info-block p, .info-block a {
+.info-block p,
+.info-block a {
   font-size: 0.95rem;
   color: var(--text);
   text-decoration: none;
-  line-height: 1.8;
+  line-height: 1.9;
 }
 
 .info-block a:hover {
-  text-decoration: underline;
+  color: var(--muted);
 }
 
 /* FOOTER */
@@ -260,9 +313,10 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 /* RESPONSIVE */
@@ -276,14 +330,28 @@ footer {
 
   nav { gap: 1.5rem; }
 
-  .hero { padding: 3rem 1.5rem 2.5rem; flex-direction: column; gap: 2rem; align-items: flex-start; }
+  .hero {
+    padding: 3.5rem 1.5rem 2.5rem;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
   .logo-hero { width: 120px; height: 120px; }
   .color-row { margin: 0 1.5rem 4rem; }
   section { padding: 3rem 1.5rem; }
-  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+
+  footer {
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
 
   .tap-item {
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: 40px 1fr;
+    padding: 1.25rem 0.5rem;
   }
+
   .tap-abv { display: none; }
 }
