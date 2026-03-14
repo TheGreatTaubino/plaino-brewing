@@ -33,6 +33,13 @@ const EVENTS = [
     tag: "special"
   },
   {
+    date: "2026-03-14",
+    title: "Crawfish Boil",
+    time: "2:00 PM",
+    description: "Fresh crawfish boil on the patio. Grab a pint and dig in.",
+    tag: "special"
+  },
+  {
     date: "2026-03-18",
     title: "Trivia Night",
     time: "7:30 PM",
