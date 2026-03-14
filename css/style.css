@@ -1,11 +1,11 @@
-/* Plain-O Brewing — Light Minimalist */
+/* Plain-O Brewing — Dark Minimalist */
 
 :root {
-  --bg: #f5f4f0;
-  --surface: #eceae4;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
-  --border: #d0cdc5;
+  --bg: #2e2e2e;
+  --surface: #383838;
+  --text: #e8e6e0;
+  --muted: #848484;
+  --border: #424242;
   --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -39,7 +39,7 @@ header {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(245, 244, 240, 0.95);
+  background: rgba(46, 46, 46, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 100;
