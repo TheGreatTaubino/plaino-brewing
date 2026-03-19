@@ -1,0 +1,36 @@
+name: Daily Compliment Sender
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM CST (14:00 UTC)
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allow manual trigger for testing
+
+jobs:
+  send-compliment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: compliment-sender/package-lock.json
+
+      - name: Install dependencies
+        working-directory: compliment-sender
+        run: npm ci
+
+      - name: Send daily compliment
+        working-directory: compliment-sender
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_FROM_NUMBER: ${{ secrets.TWILIO_FROM_NUMBER }}
+          WIFE_PHONE_NUMBER: ${{ secrets.WIFE_PHONE_NUMBER }}
+        run: node index.js
