@@ -1,27 +1,48 @@
-/* Plain-O Brewing — Calendar & Events */
+/* ==========================================================================
+   Plain-O Brewing — Calendar & Events Stylesheet
+   This file styles the Events page only. It depends on the CSS variables
+   (--bg, --surface, --text, --muted, --border) defined in style.css,
+   which must be loaded first.
+   ========================================================================== */
 
+/* ==========================================================================
+   CALENDAR WRAPPER
+   ========================================================================== */
+
+/* Limits the calendar grid to a readable width on large screens */
 .calendar-wrap {
   margin-bottom: 3rem;
   max-width: 560px;
 }
 
-/* Month nav */
+/* ==========================================================================
+   MONTH NAVIGATION HEADER
+   Holds the "< April 2026 >" row at the top of the calendar
+   ========================================================================== */
+
 .cal-header {
   display: flex;
-  align-items: center;
+  align-items: center; /* vertically center buttons and label */
   gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
+/* The "April 2026" text label between the prev/next buttons */
 .cal-header span {
   font-size: 0.8rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--text);
-  min-width: 180px;
+  min-width: 180px;   /* fixed width so the label doesn't shift the buttons when the
+                         month name changes length (e.g. "May" vs "September") */
   text-align: center;
 }
 
+/**
+ * The prev/next arrow buttons.
+ * They're plain squares with a border — no real button styling. They get a
+ * border and color highlight on hover to show they're interactive.
+ */
 .cal-nav {
   background: none;
   border: 1px solid var(--border);
@@ -42,13 +63,23 @@
   color: var(--text);
 }
 
-/* Grid */
+/* ==========================================================================
+   CALENDAR GRID
+   ========================================================================== */
+
+/**
+ * The grid itself is a 7-column layout — one column per day of the week.
+ * CSS Grid handles all the cell placement automatically; we just tell it
+ * we want 7 equal-width columns and it figures out where each cell goes.
+ * The gap adds a tiny 2px gutter between cells.
+ */
 .cal-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
 }
 
+/* Day-of-week headers: "SUN", "MON", "TUE", etc. */
 .cal-dow {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
@@ -58,6 +89,16 @@
   padding: 0.5rem 0;
 }
 
+/**
+ * Individual day cells.
+ *
+ * aspect-ratio: 1 makes every cell a perfect square regardless of its width.
+ * Since all 7 cells in a row share the same width (1fr each), they'll all
+ * be the same size.
+ *
+ * flex + align-items/justify-content: center stacks the day number and dots
+ * centered inside the square.
+ */
 .cal-cell {
   aspect-ratio: 1;
   display: flex;
@@ -66,23 +107,36 @@
   justify-content: center;
   gap: 4px;
   border-radius: 3px;
-  cursor: default;
+  cursor: default; /* most days are not clickable, so keep the default arrow cursor */
   transition: background 0.15s;
   position: relative;
 }
 
+/* Days that have events get a pointer cursor to signal they're clickable */
 .cal-cell.cal-has-events {
   cursor: pointer;
 }
 
+/* Hovering a day with events reveals a subtle background tint */
 .cal-cell.cal-has-events:hover {
   background: var(--surface);
 }
 
+/**
+ * TODAY'S DATE INDICATOR
+ *
+ * The day number for today is shown in bright white (var(--text)) and bold.
+ * A tiny dot appears BELOW the number using an ::after pseudo-element.
+ * This is a common calendar pattern — it signals "you are here" without
+ * needing any extra HTML.
+ *
+ * The dot is absolutely positioned relative to .cal-day-num, centered
+ * horizontally with left: 50% + transform: translateX(-50%).
+ */
 .cal-cell.cal-today .cal-day-num {
   color: var(--text);
   font-weight: 700;
-  position: relative;
+  position: relative; /* needed so the ::after dot positions relative to this element */
 }
 
 .cal-cell.cal-today .cal-day-num::after {
@@ -90,50 +144,72 @@
   position: absolute;
   bottom: -3px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* shift left by half its own width to perfectly center it */
   width: 4px;
   height: 4px;
-  border-radius: 50%;
+  border-radius: 50%; /* makes it a circle */
   background: var(--text);
 }
 
+/* Selected state (after clicking a day) — slight background + outline border */
 .cal-cell.cal-selected {
   background: var(--surface);
   outline: 1px solid var(--border);
 }
 
+/* Day numbers are dimmed by default; only event-days get bright text */
 .cal-day-num {
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--muted); /* dim for days without events */
   line-height: 1;
 }
 
+/* Days with events get a brighter day number to stand out */
 .cal-has-events .cal-day-num {
   color: var(--text);
 }
 
+/* ==========================================================================
+   EVENT DOTS (the colored circles inside calendar cells)
+   ========================================================================== */
+
+/* Container that holds the row of dots; flexbox keeps them side by side */
 .cal-dots {
   display: flex;
   gap: 3px;
 }
 
+/**
+ * Each dot is a tiny colored circle. The actual color is set via
+ * dot.style.background in calendar.js, so the CSS here just handles sizing.
+ * We show up to 3 dots per cell (one per event, max 3 even if more exist).
+ */
 .cal-dot {
   width: 5px;
   height: 5px;
-  border-radius: 50%;
+  border-radius: 50%; /* circle */
   display: block;
 }
 
-/* Legend */
+/* ==========================================================================
+   LEGEND
+   The color key below the calendar grid
+   ========================================================================== */
+
+/**
+ * flex-wrap: wrap lets legend items wrap to a second line if the screen
+ * is too narrow to fit them all in a row.
+ */
 .cal-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem 1.5rem;
+  gap: 1rem 1.5rem; /* 1rem vertical gap, 1.5rem horizontal gap between items */
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border);
 }
 
+/* Each legend item is a colored dot + a text label side by side */
 .cal-legend span {
   display: flex;
   align-items: center;
@@ -144,15 +220,23 @@
   color: var(--muted);
 }
 
+/* The colored dot in each legend item.
+   font-style: normal overrides the italic default for <i> tags — we're
+   using <i> as a generic icon container, not for italic text. */
 .cal-legend i {
   display: block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  font-style: normal;
+  font-style: normal; /* <i> is italic by default; this resets that */
 }
 
-/* Events list */
+/* ==========================================================================
+   EVENTS LIST
+   The scrollable list of upcoming events below the calendar
+   ========================================================================== */
+
+/* Outer container; the top border connects visually to the calendar above */
 .events-list {
   display: flex;
   flex-direction: column;
@@ -160,6 +244,15 @@
   margin-top: 1rem;
 }
 
+/**
+ * Each event row uses a 3-column grid:
+ *   - 140px for the date/time column
+ *   - 1fr (all remaining space) for the title and description
+ *   - auto (shrinks to fit) for the tag label
+ *
+ * align-items: start means columns align to their TOP edge, not centered,
+ * which looks better when description text wraps to multiple lines.
+ */
 .event-item {
   display: grid;
   grid-template-columns: 140px 1fr auto;
@@ -171,29 +264,34 @@
   transition: background 0.2s;
 }
 
+/* Subtle hover highlight on each event row */
 .event-item:hover {
   background: var(--surface);
 }
 
+/* The left column holding the date and time, stacked vertically */
 .event-date-col {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  padding-top: 0.1rem;
+  padding-top: 0.1rem; /* tiny nudge to optically align with the title */
 }
 
+/* Date text (e.g. "Sat, Apr 4") */
 .event-date {
   font-size: 0.78rem;
   color: var(--text);
   letter-spacing: 0.05em;
 }
 
+/* Time text (e.g. "7:00 PM") — dimmer than the date */
 .event-time {
   font-size: 0.7rem;
   color: var(--muted);
   letter-spacing: 0.08em;
 }
 
+/* Row containing the colored dot and the event title, side by side */
 .event-title-row {
   display: flex;
   align-items: center;
@@ -201,11 +299,12 @@
   margin-bottom: 0.35rem;
 }
 
+/* Small colored circle matching the event's tag color */
 .event-tag-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  flex-shrink: 0;
+  flex-shrink: 0; /* don't let the dot compress if the title is long */
 }
 
 .event-title {
@@ -214,12 +313,19 @@
   letter-spacing: 0.02em;
 }
 
+/* Optional description text under the title */
 .event-desc {
   font-size: 0.8rem;
   color: var(--muted);
   line-height: 1.6;
 }
 
+/**
+ * Tag label on the far right (e.g. "LIVE MUSIC").
+ * The color is set inline from JS to match the event's category color.
+ * white-space: nowrap prevents multi-word tags like "live music" from
+ * wrapping onto two lines.
+ */
 .event-tag-label {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
@@ -228,6 +334,7 @@
   white-space: nowrap;
 }
 
+/* Shown when no events match the current view or filter */
 .events-empty {
   color: var(--muted);
   font-size: 0.85rem;
@@ -235,33 +342,51 @@
   letter-spacing: 0.05em;
 }
 
-/* Responsive */
+/* ==========================================================================
+   RESPONSIVE — Mobile (screens 720px wide or narrower)
+   ========================================================================== */
+
 @media (max-width: 720px) {
+
+  /* Calendar fills the full screen width on mobile */
   .calendar-wrap { max-width: 100%; }
 
+  /* Slightly smaller month label since the screen is narrower */
   .cal-header span { min-width: 140px; font-size: 0.72rem; }
 
+  /* Tighter day-of-week headers to fit all 7 columns */
   .cal-dow { font-size: 0.55rem; letter-spacing: 0.05em; padding: 0.35rem 0; }
 
+  /* Smaller day numbers */
   .cal-day-num { font-size: 0.7rem; }
 
+  /* Slightly smaller event dots */
   .cal-dot { width: 4px; height: 4px; }
 
-  .cal-nav { width: 40px; height: 40px; } /* bigger touch target */
+  /* Larger nav buttons on mobile for easier tapping */
+  .cal-nav { width: 40px; height: 40px; }
 
+  /* Tighter legend spacing on small screens */
   .cal-legend { gap: 0.6rem 1rem; }
 
+  /**
+   * On mobile, each event row switches from 3 columns to a single column
+   * (everything stacks vertically). This is much easier to read on a
+   * narrow phone screen than a compressed 3-column layout.
+   */
   .event-item {
     grid-template-columns: 1fr;
     gap: 0.4rem;
     padding: 1.25rem 0.5rem;
   }
 
+  /* Date and time go side by side on one line instead of stacked */
   .event-date-col {
     flex-direction: row;
     gap: 0.75rem;
     align-items: center;
   }
 
+  /* Tag label (e.g. "LIVE MUSIC") is hidden on mobile — the dot color still shows the category */
   .event-tag-label { display: none; }
 }

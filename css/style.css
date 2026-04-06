@@ -1,5 +1,25 @@
-/* Plain-O Brewing — Dark Minimalist */
+/* ==========================================================================
+   Plain-O Brewing — Main Stylesheet
+   Dark minimalist design. Almost all colors come from CSS variables
+   defined at the top in :root, so changing a color in one place updates
+   it everywhere on the site.
+   ========================================================================== */
 
+/**
+ * CSS VARIABLES (Design Tokens)
+ *
+ * Think of these like named paint swatches. Instead of writing "#2e2e2e"
+ * a hundred times, we give that color a name (--bg) and use the name
+ * everywhere. If we ever want to change the background color, we change
+ * it in ONE place and the whole site updates.
+ *
+ * --bg      : The dark gray page background
+ * --surface : A slightly lighter gray for cards / hover states
+ * --text    : Off-white used for headings and important text
+ * --muted   : Medium gray for secondary/helper text
+ * --border  : Very subtle dark line used for dividers
+ * --font    : The font stack — Inter first, then system fallbacks
+ */
 :root {
   --bg: #2e2e2e;
   --surface: #383838;
@@ -9,6 +29,17 @@
   --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
+/**
+ * GLOBAL RESET
+ *
+ * Browsers add their own default margin/padding to elements (e.g. h1 has
+ * a big top margin by default). This resets all of that to zero so we
+ * start from a blank slate and nothing looks different across browsers.
+ *
+ * box-sizing: border-box is a friendlier sizing model — it means when you
+ * set an element's width to 200px, the border and padding are INCLUDED
+ * in that 200px instead of being added on top. Much less confusing.
+ */
 * {
   margin: 0;
   padding: 0;
@@ -16,57 +47,94 @@
 }
 
 html {
-  font-size: 16px;
-  scroll-behavior: smooth;
+  font-size: 16px;       /* sets the base unit — 1rem = 16px everywhere */
+  scroll-behavior: smooth; /* makes in-page anchor links scroll smoothly instead of jumping */
 }
 
+/**
+ * BODY
+ *
+ * We use flexbox with flex-direction: column so the page stacks vertically:
+ * header on top, main content in the middle, footer at the bottom.
+ * min-height: 100vh means the body is always at least as tall as the
+ * visible screen, which keeps the footer from floating up on short pages.
+ */
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
-  line-height: 1.6;
+  line-height: 1.6; /* a little extra breathing room between lines of text */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* HEADER / NAV */
+/* ==========================================================================
+   HEADER / NAV
+   ========================================================================== */
+
+/**
+ * The sticky header stays fixed at the top of the screen while scrolling.
+ * position: sticky + top: 0 achieves this without the header jumping around.
+ *
+ * The background uses rgba() with slight transparency (0.95 = 95% opaque)
+ * paired with backdrop-filter: blur() to create a frosted-glass effect —
+ * content scrolling behind the header looks slightly blurred.
+ * -webkit-backdrop-filter is needed for Safari support.
+ *
+ * z-index: 100 makes sure the header always appears on top of other content
+ * that might overlap it while scrolling.
+ */
 header {
   padding: 1.75rem 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* logo on the left, nav on the right */
   align-items: center;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   background: rgba(46, 46, 46, 0.95);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari needs this prefix */
   z-index: 100;
 }
 
+/* The logo is an <a> tag so it's a link — remove default underline/color */
 .logo {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* wordmark above, subtitle below */
   text-decoration: none;
   color: var(--text);
 }
 
+/* "PLAIN-O" — the big bold wordmark */
 .logo-wordmark {
   font-size: 1.4rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15em; /* spread letters apart for a more industrial feel */
   text-transform: uppercase;
 }
 
+/* "Brewing Co." — the smaller tagline below the wordmark */
 .logo-sub {
   font-size: 0.6rem;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.4em; /* even more spread out — tiny text with wide tracking */
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* Larger logo for homepage hero */
+/**
+ * HERO LOGO IMAGE
+ *
+ * On the homepage, a large version of the logo image appears in the hero
+ * section. It's a background-image instead of an <img> tag so we can use
+ * background-size and background-position to show just the right portion
+ * of the image file.
+ *
+ * background-size: 200% 200% means the image is zoomed in to twice its
+ * natural size (so only a quarter of it is visible at once).
+ * background-position: 0% 100% anchors it to the bottom-left portion.
+ */
 .logo-hero {
   display: block;
   width: 180px;
@@ -75,68 +143,111 @@ header {
   background-size: 200% 200%;
   background-position: 0% 100%;
   background-repeat: no-repeat;
-  flex-shrink: 0;
+  flex-shrink: 0; /* don't let the hero layout squish this element */
 }
 
+/* Nav links sit side by side with equal spacing between them */
 nav {
   display: flex;
   gap: 2.5rem;
 }
 
+/**
+ * NAV LINKS
+ *
+ * Each link is a small all-caps label with wide letter-spacing — a classic
+ * minimalist/industrial type treatment.
+ *
+ * position: relative and padding-bottom: 2px set up the sliding underline
+ * animation below (the ::after pseudo-element).
+ */
 nav a {
   text-decoration: none;
-  color: var(--muted);
+  color: var(--muted); /* inactive links are dimmed */
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  transition: color 0.2s;
+  transition: color 0.2s; /* smooth color change on hover */
   position: relative;
   padding-bottom: 2px;
 }
 
+/**
+ * ANIMATED UNDERLINE
+ *
+ * nav a::after adds an invisible thin line under each nav link.
+ * By default its width is 0 (invisible). On hover, the width animates to 100%.
+ * This creates a smooth "slide in" underline effect.
+ *
+ * This is a common CSS trick: you can't animate display:none, but you CAN
+ * animate width from 0 to 100%.
+ */
 nav a::after {
-  content: '';
+  content: '';       /* required for pseudo-elements to show up */
   position: absolute;
   bottom: -2px;
   left: 0;
-  width: 0;
+  width: 0;          /* starts invisible */
   height: 1px;
   background: var(--text);
-  transition: width 0.25s ease;
+  transition: width 0.25s ease; /* animates to full width on hover */
 }
 
+/* Make the link text bright on hover and when it's the current page */
 nav a:hover,
 nav a.active {
   color: var(--text);
 }
 
+/* Expand the underline to full width on hover and for the active page */
 nav a:hover::after,
 nav a.active::after {
   width: 100%;
 }
 
-/* MAIN */
+/* ==========================================================================
+   MAIN
+   ========================================================================== */
+
+/* flex: 1 makes <main> grow to fill all available vertical space, which
+   pushes the footer to the very bottom of the page even on short pages */
 main {
   flex: 1;
 }
 
-/* HERO */
+/* ==========================================================================
+   HERO (homepage only)
+   ========================================================================== */
+
+/**
+ * The hero section holds the big logo image and the headline text side by side.
+ * flex + align-items: center keeps them vertically centered relative to each other.
+ */
 .hero {
   padding: 7rem 3rem 5rem;
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 4rem; /* space between the logo and the text block */
 }
 
+/* Limits the text column width so it doesn't stretch too wide on big screens */
 .hero-text {
   max-width: 520px;
 }
 
+/**
+ * The hero headline uses clamp() for fluid font sizing.
+ * clamp(min, preferred, max) means:
+ *   - Never smaller than 2.5rem
+ *   - Prefers 6vw (6% of the viewport width — grows with the screen)
+ *   - Never bigger than 4.8rem
+ * This way the headline naturally resizes between small and large screens.
+ */
 .hero h1 {
   font-size: clamp(2.5rem, 6vw, 4.8rem);
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.08; /* tight line-height for large display type */
+  letter-spacing: -0.03em; /* slight negative tracking looks better at big sizes */
   margin-bottom: 1.5rem;
 }
 
@@ -144,13 +255,22 @@ main {
   font-size: 1.05rem;
   color: var(--muted);
   max-width: 400px;
-  line-height: 1.75;
+  line-height: 1.75; /* more open line-height for body text */
 }
 
 .hero-cta {
   margin-top: 2.5rem;
 }
 
+/* ==========================================================================
+   BUTTON
+   ========================================================================== */
+
+/**
+ * The .btn class styles ghost/outline buttons — transparent background with
+ * a thin border. On hover, it inverts: dark background, light text.
+ * The transition makes this color flip smooth instead of instant.
+ */
 .btn {
   display: inline-block;
   padding: 0.8rem 2.2rem;
@@ -164,17 +284,29 @@ main {
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 
+/* Inverted "filled" state on hover */
 .btn:hover {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--text);  /* off-white background */
+  color: var(--bg);         /* dark text */
   border-color: var(--text);
 }
 
-/* COLOR SWATCH ROW (homepage) */
+/* ==========================================================================
+   COLOR SWATCH ROW (homepage only)
+   ========================================================================== */
+
+/**
+ * A thin horizontal stripe of 8 color swatches representing the beer lineup.
+ * Each <span> inside gets flex: 1 so they all share the width equally.
+ *
+ * On hover of the whole row, all swatches dim slightly (opacity: 0.4).
+ * Hovering a specific swatch restores it to full opacity AND makes it grow
+ * wider (flex: 2 = twice as wide as its siblings) for a fun interactive effect.
+ */
 .color-row {
   display: flex;
-  gap: 0;
-  height: 3px;
+  gap: 0;         /* no gap between swatches — they sit flush against each other */
+  height: 3px;    /* just a thin line */
   margin: 0 3rem 6rem;
   opacity: 0.7;
 }
@@ -184,22 +316,33 @@ main {
   transition: opacity 0.2s;
 }
 
+/* When hovering the whole row, dim all swatches */
 .color-row:hover span {
   opacity: 0.4;
 }
 
+/* But the specific swatch being hovered pops back to full and grows wider */
 .color-row span:hover {
-  opacity: 1 !important;
-  flex: 2;
+  opacity: 1 !important; /* !important overrides the parent hover rule above */
+  flex: 2;               /* this swatch takes up twice the space of others */
   transition: flex 0.3s ease, opacity 0.2s;
 }
 
-/* SECTION */
+/* ==========================================================================
+   SECTION
+   ========================================================================== */
+
+/* Standard padding and top border for all content sections (taplist, events, etc.) */
 section {
   padding: 5rem 3rem;
   border-top: 1px solid var(--border);
 }
 
+/**
+ * Section headings are tiny all-caps labels — more of a "label" than a title.
+ * This is called an "eyebrow" or "overline" in design, used to categorize
+ * content without competing visually with the actual content below.
+ */
 section h2 {
   font-size: 0.65rem;
   letter-spacing: 0.4em;
@@ -208,12 +351,26 @@ section h2 {
   margin-bottom: 3rem;
 }
 
-/* TAPLIST */
+/* ==========================================================================
+   TAPLIST
+   ========================================================================== */
+
+/* Stack tap items vertically */
 .taplist {
   display: flex;
   flex-direction: column;
 }
 
+/**
+ * Each tap row uses CSS Grid with 3 columns:
+ *   - 52px for the color swatch circle
+ *   - 1fr (all remaining space) for the beer name and description
+ *   - auto (just wide enough) for the ABV percentage
+ *
+ * The box-shadow trick on the left edge uses a CSS custom property (--tap-color)
+ * set inline on each element. On hover, a colored "stripe" appears on the left
+ * using inset box-shadow — no extra HTML elements needed.
+ */
 .tap-item {
   display: grid;
   grid-template-columns: 52px 1fr auto;
@@ -224,23 +381,26 @@ section h2 {
   border-radius: 4px;
   transition: background 0.2s;
   cursor: default;
-  box-shadow: inset 3px 0 0 transparent;
+  box-shadow: inset 3px 0 0 transparent; /* invisible left stripe by default */
   transition: background 0.2s, box-shadow 0.2s;
 }
 
+/* On hover: subtle background tint + the beer's color appears as a left-edge stripe */
 .tap-item:hover {
   background: var(--surface);
-  box-shadow: inset 3px 0 0 var(--tap-color, var(--border));
+  box-shadow: inset 3px 0 0 var(--tap-color, var(--border)); /* uses the beer's color */
 }
 
+/* The circular color swatch representing each beer's "color name" */
 .tap-swatch {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 50%; /* makes it a circle */
   flex-shrink: 0;
-  box-shadow: 0 0 12px -2px var(--tap-color, transparent);
+  box-shadow: 0 0 12px -2px var(--tap-color, transparent); /* soft glow matching the beer color */
 }
 
+/* Beer name styling */
 .tap-info h3 {
   font-size: 1rem;
   font-weight: 500;
@@ -248,6 +408,7 @@ section h2 {
   text-transform: uppercase;
 }
 
+/* Beer description (style/flavor notes) */
 .tap-info p {
   font-size: 0.8rem;
   color: var(--muted);
@@ -255,14 +416,19 @@ section h2 {
   line-height: 1.5;
 }
 
+/* ABV percentage on the right side */
 .tap-abv {
   font-size: 0.72rem;
   color: var(--muted);
   letter-spacing: 0.12em;
-  white-space: nowrap;
+  white-space: nowrap; /* prevent line breaks in "5.2% ABV" */
 }
 
-/* ABOUT */
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+
+/* Keep the about text column from stretching too wide on big screens */
 .about-text {
   max-width: 580px;
 }
@@ -274,18 +440,29 @@ section h2 {
   line-height: 1.85;
 }
 
+/* <strong> tags inside about text pop out in brighter white */
 .about-text p strong {
   color: var(--text);
   font-weight: 500;
 }
 
-/* LOCATION / CONTACT */
+/* ==========================================================================
+   LOCATION / CONTACT INFO GRID
+   ========================================================================== */
+
+/**
+ * auto-fit + minmax creates a responsive grid that automatically decides
+ * how many columns to show based on available space.
+ * Each column is at least 220px wide. If the screen is wide enough for two,
+ * you get two; if not, they stack to one column automatically.
+ */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 3rem;
 }
 
+/* Small all-caps label above each info block (e.g. "Hours", "Address") */
 .info-block h3 {
   font-size: 0.6rem;
   letter-spacing: 0.35em;
@@ -294,6 +471,7 @@ section h2 {
   margin-bottom: 0.85rem;
 }
 
+/* The actual contact info text/links */
 .info-block p,
 .info-block a {
   font-size: 0.95rem;
@@ -302,16 +480,20 @@ section h2 {
   line-height: 1.9;
 }
 
+/* Links dim slightly on hover to indicate they're clickable */
 .info-block a:hover {
   color: var(--muted);
 }
 
-/* FOOTER */
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
 footer {
   padding: 2rem 3rem;
   border-top: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* text on both sides */
   align-items: center;
   font-size: 0.7rem;
   color: var(--muted);
@@ -319,9 +501,20 @@ footer {
   text-transform: uppercase;
 }
 
-/* HAMBURGER BUTTON — hidden on desktop */
+/* ==========================================================================
+   HAMBURGER BUTTON (mobile nav toggle)
+   ========================================================================== */
+
+/**
+ * The hamburger button is hidden by default (display: none) because on
+ * desktop screens the nav links are always visible. It only appears on
+ * small screens (see the @media block below).
+ *
+ * The button contains three <span> elements that look like horizontal lines.
+ * When the menu is open, CSS transforms animate them into an X shape.
+ */
 .nav-toggle {
-  display: none;
+  display: none; /* hidden on desktop */
   background: none;
   border: none;
   cursor: pointer;
@@ -330,73 +523,106 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 44px;
+  width: 44px;  /* 44px is the minimum recommended touch target size */
   height: 44px;
 }
 
+/* Each of the three horizontal lines in the hamburger icon */
 .nav-toggle span {
   display: block;
   width: 22px;
   height: 1.5px;
   background: var(--text);
   transition: transform 0.25s ease, opacity 0.2s ease;
-  transform-origin: center;
+  transform-origin: center; /* rotate around the center, not the edge */
 }
 
-/* Animated X when open */
+/**
+ * X ANIMATION — when the menu is open (header has .nav-open class)
+ *
+ * Line 1: moves DOWN slightly, then rotates 45 degrees (/)
+ * Line 2: fades out (disappears)
+ * Line 3: moves UP slightly, then rotates -45 degrees (\)
+ * Together lines 1 and 3 form an X shape.
+ *
+ * translateY(6.5px) is half the distance between the lines so they
+ * overlap perfectly at the center before rotating.
+ */
 header.nav-open .nav-toggle span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
 header.nav-open .nav-toggle span:nth-child(2) {
-  opacity: 0;
+  opacity: 0; /* middle bar fades out */
 }
 header.nav-open .nav-toggle span:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* RESPONSIVE */
+/* ==========================================================================
+   RESPONSIVE — Mobile (screens 720px wide or narrower)
+   ========================================================================== */
+
+/**
+ * @media rules let us apply different CSS only when the screen is a
+ * certain size. Everything inside this block only activates on small screens.
+ * This is how we make the same HTML file look good on both phones and desktops.
+ */
 @media (max-width: 720px) {
+
   header {
     padding: 1.25rem 1.5rem;
-    position: relative; /* for dropdown positioning */
+    position: relative; /* needed so the dropdown nav positions relative to the header */
   }
 
+  /* Show the hamburger button on mobile */
   .nav-toggle {
     display: flex;
   }
 
+  /**
+   * On mobile, the nav becomes a dropdown panel instead of a horizontal row.
+   * It's hidden by default (display: none) and positioned absolutely just
+   * below the header so it drops down over the page content.
+   * When header has the .nav-open class (added by nav.js), it switches to
+   * display: flex and the menu slides into view.
+   */
   nav {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 100%; /* just below the header's bottom edge */
     left: 0;
     right: 0;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
     padding: 1.25rem 1.5rem 1.5rem;
-    flex-direction: column;
+    flex-direction: column; /* links stack vertically */
     gap: 0;
     z-index: 99;
   }
 
+  /* Show the nav dropdown when the menu is open */
   header.nav-open nav {
     display: flex;
   }
 
+  /* Bigger, tappable nav links in mobile menu */
   nav a {
     padding: 0.85rem 0;
     font-size: 0.8rem;
     border-bottom: 1px solid var(--border);
   }
 
+  /* Last link doesn't need a bottom border since the nav panel already has one */
   nav a:last-child {
     border-bottom: none;
   }
 
+  /* The sliding underline animation looks odd in a vertical dropdown, so we hide it */
   nav a::after {
-    display: none; /* no underline animation in mobile menu */
+    display: none;
   }
 
+  /* Hero stacks vertically on mobile — logo image above, text below */
   .hero {
     padding: 3rem 1.5rem 2.5rem;
     flex-direction: column;
@@ -404,10 +630,14 @@ header.nav-open .nav-toggle span:nth-child(3) {
     align-items: flex-start;
   }
 
+  /* Shrink the hero logo image on small screens */
   .logo-hero { width: 120px; height: 120px; }
+
+  /* Tighter margins on mobile */
   .color-row { margin: 0 1.5rem 3.5rem; }
   section { padding: 3rem 1.5rem; }
 
+  /* Stack the footer text vertically and left-align it */
   footer {
     padding: 1.25rem 1.5rem;
     flex-direction: column;
@@ -415,17 +645,21 @@ header.nav-open .nav-toggle span:nth-child(3) {
     align-items: flex-start;
   }
 
+  /* Tap list loses the third column (ABV) on mobile to save space */
   .tap-item {
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 40px 1fr; /* only swatch and info, no ABV column */
     padding: 1.25rem 0.5rem;
   }
 
+  /* Hide the ABV label entirely on mobile */
   .tap-abv { display: none; }
 
+  /* Bigger button padding = larger touch target on mobile */
   .btn {
-    padding: 1rem 2rem; /* bigger touch target */
+    padding: 1rem 2rem;
   }
 
+  /* Info grid switches to 2 columns on mobile */
   .info-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;

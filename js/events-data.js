@@ -1,13 +1,31 @@
 /**
- * Plain-O Brewing — Events
+ * Plain-O Brewing — Events Data
  *
- * To add or edit an event, update the array below.
- * Each event needs:
- *   date        — "YYYY-MM-DD"
- *   title       — name of the event
- *   time        — e.g. "7:00 PM" (use "All Day" if no specific time)
- *   description — short description (optional, can be "")
- *   tag         — one of: "live music", "trivia", "special", "tasting", "private"
+ * This file is the single source of truth for all events on the website.
+ * When you want to add, edit, or remove an event, this is the ONLY file
+ * you need to touch. The calendar page reads this list automatically.
+ *
+ * HOW TO ADD AN EVENT:
+ *   1. Copy one of the objects below (everything between { and }).
+ *   2. Paste it inside the EVENTS array (don't forget a comma between items).
+ *   3. Fill in the date, title, time, description, and tag.
+ *   4. Save the file and push to GitHub — done!
+ *
+ * FIELD RULES:
+ *   date        — Must be in "YYYY-MM-DD" format (year-month-day).
+ *                 Example: "2026-07-04" for July 4th, 2026.
+ *   title       — The name shown on the calendar and event list.
+ *   time        — Human-readable time like "7:00 PM". Use "All Day" if there's
+ *                 no specific start time.
+ *   description — A short sentence or two about the event. Can be "" (empty
+ *                 string) if you have nothing to say yet.
+ *   tag         — Picks the color dot on the calendar. Must be EXACTLY one of:
+ *                   "live music"  — blue
+ *                   "trivia"      — green
+ *                   "special"     — red
+ *                   "tasting"     — purple
+ *                   "private"     — tan/gray
+ *                 Using a tag not in this list will just show a gray dot.
  */
 
 const EVENTS = [
