@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plain-O Brewing</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" type="image/png" href="assets/logo/logo-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -18,38 +17,29 @@
     gtag('config', 'G-H10JSFPHW4');
   </script>
 </head>
-<body>
+<body class="homepage">
 
   <header>
-    <a href="index.html" class="logo">
-      <span class="logo-wordmark">Plain-O</span>
-      <span class="logo-sub">Brewing Co.</span>
-    </a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="pages/taplist.html">Taplist</a>
-      <a href="pages/events.html">Events</a>
-      <a href="pages/about.html">About</a>
-      <a href="pages/contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <div class="hero">
-      <img class="logo-hero" src="assets/logo/logo-stacked.png" alt="Plain-O Brewing Co. logo" />
-      <div class="hero-text">
-        <h1>Beer doesn't need a story. Just a color.</h1>
-        <p>Plain-O Brewing. Simple names, honest pints. No fuss, no nonsense — just good beer.</p>
-        <div class="hero-cta">
-          <a href="pages/taplist.html" class="btn">See What's On Tap</a>
+    <div class="header-inner">
+      <a href="index.html" class="logo-group">
+        <img class="logo-mark-sm" src="favicon.svg" alt="Plain-O Brewing Co. mark" />
+        <div class="logo-text">
+          <span class="logo-wordmark">Plain-O</span>
+          <span class="logo-sub">Brewing Co.</span>
+          <span class="logo-tagline-sm">Simple names, honest pints.</span>
         </div>
-      </div>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <a href="pages/taplist.html">Beers</a>
+        <a href="pages/events.html">Taproom</a>
+        <a href="pages/about.html">About</a>
+        <a href="#">Shop</a>
+      </nav>
     </div>
-
-    <div class="color-row">
+    <div class="header-stripe">
       <span style="background:#3b5fa0;"></span>
       <span style="background:#4a8c5c;"></span>
       <span style="background:#c0392b;"></span>
@@ -59,11 +49,128 @@
       <span style="background:#b0a090;"></span>
       <span style="background:#1a1a1a;"></span>
     </div>
+  </header>
+
+  <main>
+
+    <div class="hero-concept">
+      <div class="hero-left">
+        <h1>Beer doesn't need a story. Just a color.</h1>
+        <p>Simple names, honest pints.</p>
+        <a href="pages/taplist.html" class="btn">Explore the Colors &rarr;</a>
+      </div>
+      <div class="hero-right">
+        <div class="taps-row">
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#3b5fa0; --knob-color:#3b5fa0;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Blue</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#4a8c5c; --knob-color:#4a8c5c;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Green</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#c0392b; --knob-color:#c0392b;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Red</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#e8c84a; --knob-color:#e8c84a;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Yellow</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#e87b2a; --knob-color:#e87b2a;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Orange</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#8b5e9e; --knob-color:#8b5e9e;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Purple</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#b0a090; --knob-color:#b0a090;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Tan</span>
+          </div>
+
+          <div class="tap-handle">
+            <div class="tap-knob" style="background:#2a2a2a; border:1px solid #666; --knob-color:#666;"></div>
+            <div class="tap-rod"></div>
+            <div class="tap-mount"></div>
+            <span class="tap-label">Black</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="beers-row">
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#3b5fa0;"></div>
+        <span class="beer-name">Blue</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#4a8c5c;"></div>
+        <span class="beer-name">Green</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#c0392b;"></div>
+        <span class="beer-name">Red</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#e8c84a;"></div>
+        <span class="beer-name">Yellow</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#e87b2a;"></div>
+        <span class="beer-name">Orange</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#8b5e9e;"></div>
+        <span class="beer-name">Purple</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#b0a090;"></div>
+        <span class="beer-name">Tan</span>
+      </div>
+
+      <div class="beer-item">
+        <div class="beer-cup" style="--beer-color:#3a3a3a; outline: 1px solid #555;"></div>
+        <span class="beer-name">Black</span>
+      </div>
+
+    </div>
+
   </main>
 
   <footer>
-    <span>Plain-O Brewing Co.</span>
-    <span>Drink simple.</span>
+    <span>Simple names, honest pints.</span>
+    <span>Est. 2023 &middot; Plano, TX</span>
   </footer>
 
   <script src="js/nav.js"></script>
