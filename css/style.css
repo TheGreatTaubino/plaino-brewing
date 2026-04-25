@@ -139,10 +139,7 @@ header {
   display: block;
   width: 180px;
   height: 180px;
-  background-image: url('Plainobrewing_logo.png');
-  background-size: 200% 200%;
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
+  object-fit: contain;
   flex-shrink: 0; /* don't let the hero layout squish this element */
 }
 
@@ -715,7 +712,7 @@ header.nav-open .nav-toggle span:nth-child(3) {
   }
 
   /* Shrink the hero logo image on small screens */
-  .logo-hero { width: 120px; height: 120px; }
+  .logo-hero { width: 120px; height: 120px; object-fit: contain; }
 
   /* Tighter margins on mobile */
   .color-row { margin: 0 1.5rem 3.5rem; }
