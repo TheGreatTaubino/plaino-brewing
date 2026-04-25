@@ -213,6 +213,12 @@ nav a.active::after {
    pushes the footer to the very bottom of the page even on short pages */
 main {
   flex: 1;
+  animation: fadein 0.35s ease both;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ==========================================================================
