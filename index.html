@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plain-O Brewing</title>
-  <link rel="icon" type="image/png" href="assets/logo/logo-mark.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
@@ -33,10 +33,11 @@
         <span></span><span></span><span></span>
       </button>
       <nav>
-        <a href="pages/taplist.html">Beers</a>
-        <a href="pages/events.html">Taproom</a>
+        <a href="index.html">Home</a>
+        <a href="pages/taplist.html">Taplist</a>
+        <a href="pages/events.html">Events</a>
         <a href="pages/about.html">About</a>
-        <a href="#">Shop</a>
+        <a href="pages/contact.html">Contact</a>
       </nav>
     </div>
     <div class="header-stripe">
@@ -62,59 +63,67 @@
       <div class="hero-right">
         <div class="taps-row">
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#3b5fa0; --knob-color:#3b5fa0;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#3b5fa0;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Blue</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#4a8c5c; --knob-color:#4a8c5c;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#4a8c5c;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Green</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#c0392b; --knob-color:#c0392b;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#c0392b;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Red</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#e8c84a; --knob-color:#e8c84a;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#e8c84a;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Yellow</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#e87b2a; --knob-color:#e87b2a;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#e87b2a;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Orange</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#8b5e9e; --knob-color:#8b5e9e;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#8b5e9e;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Purple</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#b0a090; --knob-color:#b0a090;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#b0a090;">
+            <div class="tap-cap"></div>
+            <div class="tap-body"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Tan</span>
           </div>
 
-          <div class="tap-handle">
-            <div class="tap-knob" style="background:#2a2a2a; border:1px solid #666; --knob-color:#666;"></div>
-            <div class="tap-rod"></div>
-            <div class="tap-mount"></div>
+          <div class="tap-unit" style="--color:#484848;">
+            <div class="tap-cap" style="box-shadow: 0 0 10px 2px #666, 0 0 24px 6px #444; border: 1px solid #666;"></div>
+            <div class="tap-body" style="border: 1px solid #555;"></div>
+            <div class="tap-collar"></div>
+            <div class="tap-faucet"><div class="tap-spout"></div></div>
             <span class="tap-label">Black</span>
           </div>
 
@@ -124,43 +133,75 @@
 
     <div class="beers-row">
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#3b5fa0;"></div>
+      <div class="pint-wrap" style="--beer-color:#3b5fa0;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Blue</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#4a8c5c;"></div>
+      <div class="pint-wrap" style="--beer-color:#4a8c5c;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Green</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#c0392b;"></div>
+      <div class="pint-wrap" style="--beer-color:#c0392b;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Red</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#e8c84a;"></div>
+      <div class="pint-wrap" style="--beer-color:#e8c84a;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Yellow</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#e87b2a;"></div>
+      <div class="pint-wrap" style="--beer-color:#e87b2a;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Orange</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#8b5e9e;"></div>
+      <div class="pint-wrap" style="--beer-color:#8b5e9e;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Purple</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#b0a090;"></div>
+      <div class="pint-wrap" style="--beer-color:#b0a090;">
+        <div class="pint-glass">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Tan</span>
       </div>
 
-      <div class="beer-item">
-        <div class="beer-cup" style="--beer-color:#3a3a3a; outline: 1px solid #555;"></div>
+      <div class="pint-wrap" style="--beer-color:#444;">
+        <div class="pint-glass" style="filter: drop-shadow(0 0 12px #555);">
+          <div class="pint-beer"></div>
+          <div class="pint-foam"></div>
+          <div class="pint-glare"></div>
+        </div>
         <span class="beer-name">Black</span>
       </div>
 

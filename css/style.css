@@ -848,64 +848,111 @@ body.homepage header {
 }
 
 /* ==========================================================================
-   TAP HANDLES — CSS illustrations of a tap wall
+   TAP HANDLES — Realistic CSS tap wall
+   Each .tap-unit receives --color via inline style.
+   Structure: glowing cap → branded body → chrome collar → faucet housing → spout
    ========================================================================== */
 
 .taps-row {
   display: flex;
   align-items: flex-end;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
-.tap-handle {
+.tap-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: default;
+  transition: transform 0.25s ease;
 }
 
-/* Colored round knob at the top of each handle */
-.tap-knob {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  box-shadow: 0 0 14px -2px var(--knob-color, transparent);
-  transition: transform 0.2s, box-shadow 0.2s;
+.tap-unit:hover {
+  transform: translateY(-5px);
 }
 
-.tap-handle:hover .tap-knob {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 18px -2px var(--knob-color, transparent);
-}
-
-/* Vertical metal rod */
-.tap-rod {
-  width: 5px;
-  height: 130px;
-  background: linear-gradient(to right, #363636, #585858, #363636);
-  border-radius: 2px;
-}
-
-/* Base mount where rod meets the bar */
-.tap-mount {
+/* Glowing spherical cap at top — simulates a lit lens/orb */
+.tap-cap {
   width: 22px;
-  height: 8px;
-  background: #484848;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,
+    rgba(255, 255, 255, 0.65) 0%,
+    var(--color) 45%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  box-shadow:
+    0 0 8px 2px var(--color),
+    0 0 22px 6px var(--color);
+  filter: saturate(1.2);
+  position: relative;
+  z-index: 1;
+}
+
+/* Tall cylindrical handle body — the branded grip */
+.tap-body {
+  width: 20px;
+  height: 100px;
+  border-radius: 2px 2px 3px 3px;
+  background:
+    linear-gradient(to right,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(255, 255, 255, 0.22) 22%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(0, 0, 0, 0.2) 100%
+    ),
+    var(--color);
+  box-shadow:
+    inset 1px 0 3px rgba(255, 255, 255, 0.12),
+    0 0 18px -6px var(--color);
+  position: relative;
+}
+
+/* Horizontal accent bands etched into the body */
+.tap-body::before,
+.tap-body::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.tap-body::before { top: 10px; }
+.tap-body::after  { bottom: 10px; }
+
+/* Narrow chrome collar — connects body to faucet */
+.tap-collar {
+  width: 14px;
+  height: 12px;
+  background: linear-gradient(to bottom, #707070, #909090 40%, #585858);
   border-radius: 2px;
 }
 
-.tap-mount::after {
-  content: '';
-  display: block;
-  width: 14px;
-  height: 6px;
-  background: #3a3a3a;
-  border-radius: 0 0 3px 3px;
-  margin: 0 auto;
+/* Chunky faucet housing — the metallic block that mounts on the tower */
+.tap-faucet {
+  width: 28px;
+  height: 18px;
+  background: linear-gradient(to bottom, #686868, #484848 60%, #383838);
+  border-radius: 3px 3px 2px 2px;
+  position: relative;
+}
+
+/* Downward spout — where the beer actually flows */
+.tap-spout {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 16px;
+  background: linear-gradient(to right, #3a3a3a, #5e5e5e, #3a3a3a);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .tap-label {
-  margin-top: 0.65rem;
+  margin-top: 1.2rem;
   font-size: 0.52rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -913,38 +960,96 @@ body.homepage header {
 }
 
 /* ==========================================================================
-   BEERS ROW — Bottom row of colored cup shapes
+   BEERS ROW — Realistic pint glass renderings
+   Each .pint-wrap receives --beer-color via inline style.
+   Structure: glass clip-path with beer fill + foam head + glass glare highlights
    ========================================================================== */
 
 .beers-row {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 1.25rem;
+  gap: 1.4rem;
   padding: 2.5rem 3rem 3.5rem;
   border-top: 1px solid var(--border);
   background: rgba(0, 0, 0, 0.18);
 }
 
-.beer-item {
+/* Wrapper handles hover lift and drop-shadow glow */
+.pint-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
+  transition: transform 0.22s ease;
 }
 
-/* Trapezoid cup shape using clip-path */
-.beer-cup {
-  width: 52px;
-  height: 68px;
-  background: var(--beer-color, #555);
-  clip-path: polygon(10% 0%, 90% 0%, 78% 100%, 22% 100%);
-  transition: transform 0.2s, filter 0.2s;
+.pint-wrap:hover {
+  transform: translateY(-5px);
 }
 
-.beer-item:hover .beer-cup {
-  transform: translateY(-4px);
-  filter: brightness(1.15);
+/* The glass — clip-path creates the classic pint taper (wide top, narrow bottom).
+   filter drop-shadow follows the clip-path outline for the colored glow. */
+.pint-glass {
+  width: 58px;
+  height: 80px;
+  clip-path: polygon(6% 0%, 94% 0%, 86% 100%, 14% 100%);
+  position: relative;
+  filter:
+    drop-shadow(0 0  1px rgba(255, 255, 255, 0.12))
+    drop-shadow(0 6px 18px var(--beer-color));
+}
+
+/* Beer fill — the liquid inside the glass */
+.pint-beer {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--beer-color);
+  opacity: 0.92;
+}
+
+/* Foam head — cream/off-white layer at the top */
+.pint-foam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 22%;
+  background: linear-gradient(to bottom,
+    rgba(255, 252, 240, 0.98) 0%,
+    rgba(238, 224, 196, 0.88) 70%,
+    rgba(228, 212, 178, 0.72) 100%
+  );
+}
+
+/* Glass glare — thin vertical highlights that simulate refracted light */
+.pint-glare {
+  position: absolute;
+  top: 5%;
+  bottom: 5%;
+  left: 10%;
+  width: 9%;
+  background: linear-gradient(to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  border-radius: 3px;
+}
+
+/* Second thin glare on the right side */
+.pint-glare::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  left: 400%;
+  width: 40%;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
 }
 
 .beer-name {
@@ -991,13 +1096,15 @@ body.homepage footer {
   }
 
   .taps-row {
-    gap: 0.7rem;
+    gap: 0.6rem;
     padding-right: 1.5rem;
   }
 
-  .tap-knob { width: 28px; height: 28px; }
-  .tap-rod { height: 90px; }
-  .tap-mount { width: 18px; }
+  .tap-cap  { width: 16px; height: 16px; }
+  .tap-body { width: 14px; height: 68px; }
+  .tap-collar { width: 10px; height: 9px; }
+  .tap-faucet { width: 20px; height: 14px; }
+  .tap-spout  { width: 6px; height: 11px; bottom: -11px; }
 
   .beers-row {
     gap: 0.75rem;
@@ -1006,7 +1113,7 @@ body.homepage footer {
     justify-content: flex-start;
   }
 
-  .beer-cup { width: 40px; height: 54px; }
+  .pint-glass { width: 42px; height: 58px; }
 
   body.homepage footer {
     flex-direction: column;
