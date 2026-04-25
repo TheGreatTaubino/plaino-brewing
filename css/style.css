@@ -137,8 +137,8 @@ header {
  */
 .logo-hero {
   display: block;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   flex-shrink: 0; /* don't let the hero layout squish this element */
 }
