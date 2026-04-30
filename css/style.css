@@ -86,11 +86,9 @@ body {
  * that might overlap it while scrolling.
  */
 header {
-  padding: 1.75rem 3rem;
   display: flex;
-  justify-content: space-between; /* logo on the left, nav on the right */
-  align-items: center;
-  border-bottom: 1px solid var(--border);
+  flex-direction: column;
+  border-bottom: none;
   position: sticky;
   top: 0;
   background: rgba(46, 46, 46, 0.95);
@@ -99,12 +97,42 @@ header {
   z-index: 100;
 }
 
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  width: 100%;
+}
+
 /* The logo is an <a> tag so it's a link — remove default underline/color */
+.logo,
+.logo-group {
+  text-decoration: none;
+  color: var(--text);
+}
+
 .logo {
   display: flex;
   flex-direction: column; /* wordmark above, subtitle below */
-  text-decoration: none;
-  color: var(--text);
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.logo-mark-sm {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
 }
 
 /* "PLAIN-O" — the big bold wordmark */
@@ -121,6 +149,23 @@ header {
   letter-spacing: 0.4em; /* even more spread out — tiny text with wide tracking */
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.logo-tagline-sm {
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.header-stripe {
+  display: flex;
+  width: 100%;
+  height: 4px;
+}
+
+.header-stripe span {
+  flex: 1;
 }
 
 /**
@@ -651,8 +696,11 @@ header.nav-open .nav-toggle span:nth-child(3) {
 @media (max-width: 720px) {
 
   header {
-    padding: 1.25rem 1.5rem;
     position: relative; /* needed so the dropdown nav positions relative to the header */
+  }
+
+  .header-inner {
+    padding: 1rem 1.5rem;
   }
 
   /* Show the hamburger button on mobile */
@@ -747,377 +795,249 @@ header.nav-open .nav-toggle span:nth-child(3) {
   }
 }
 
+
 /* ==========================================================================
-   HOMEPAGE — CONCEPT REDESIGN
-   Scoped under body.homepage to avoid affecting any other pages.
+   HOMEPAGE — CONSISTENCY PASS
+   Returns the homepage to the same dark minimalist system used by subpages.
    ========================================================================== */
 
-body.homepage header {
-  flex-direction: column;
-  padding: 0;
-  border-bottom: none;
+body.homepage {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
 }
 
-.header-inner {
-  display: flex;
+body.homepage::before {
+  display: none;
+}
+
+body.homepage .logo-wordmark {
+  font-family: var(--font);
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+}
+
+body.homepage .logo-sub,
+body.homepage nav a,
+body.homepage .btn,
+body.homepage footer {
+  font-family: var(--font);
+}
+
+body.homepage nav a {
+  color: var(--muted);
+  letter-spacing: 0.2em;
+}
+
+body.homepage nav a:hover,
+body.homepage nav a.active {
+  color: var(--text);
+}
+
+body.homepage .btn {
+  border-radius: 0;
+  border-color: var(--border);
+  color: var(--text);
+  background: transparent;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+}
+
+body.homepage .btn:hover {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+body.homepage footer {
   justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 3rem;
-  width: 100%;
-}
-
-/* Logo group: small circle mark + stacked wordmark text */
-.logo-group {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  text-decoration: none;
-  color: var(--text);
-}
-
-.logo-mark-sm {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Tiny tagline under the wordmark, visible only in the homepage header */
-.logo-tagline-sm {
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
+  gap: 0;
   color: var(--muted);
-  margin-top: 0.15rem;
 }
 
-/* 8-color stripe spanning full header width, replacing the border-bottom */
-.header-stripe {
-  display: flex;
-  width: 100%;
-  height: 4px;
-}
-
-.header-stripe span {
-  flex: 1;
-}
-
-/* ==========================================================================
-   HERO — Two column: text left, tap wall right
-   ========================================================================== */
-
-.hero-concept {
-  display: flex;
+.home-hero-realistic {
+  display: grid;
+  grid-template-columns: minmax(96px, 0.22fr) minmax(280px, 0.78fr) minmax(520px, 1.2fr);
+  gap: clamp(2.25rem, 4vw, 4.5rem);
   align-items: center;
-  padding: 5rem 3rem 3rem;
-  gap: 4rem;
-  min-height: calc(100vh - 90px);
+  padding-bottom: 4rem;
 }
 
-.hero-left {
-  flex: 0 0 40%;
-  max-width: 40%;
-}
-
-.hero-left h1 {
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.25rem;
-  color: var(--text);
-}
-
-.hero-left p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-  letter-spacing: 0.05em;
-}
-
-.hero-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 2rem;
-}
-
-/* ==========================================================================
-   TAP HANDLES — Realistic CSS tap wall
-   Each .tap-unit receives --color via inline style.
-   Structure: glowing cap → branded body → chrome collar → faucet housing → spout
-   ========================================================================== */
-
-.taps-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.1rem;
-}
-
-.tap-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: default;
-  transition: transform 0.25s ease;
-}
-
-.tap-unit:hover {
-  transform: translateY(-5px);
-}
-
-/* Glowing spherical cap at top — simulates a lit lens/orb */
-.tap-cap {
-  width: 22px;
-  height: 22px;
+.home-hero-realistic .logo-hero {
+  width: clamp(96px, 12vw, 160px);
+  height: clamp(96px, 12vw, 160px);
+  background: var(--bg);
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%,
-    rgba(255, 255, 255, 0.65) 0%,
-    var(--color) 45%,
-    rgba(0, 0, 0, 0.25) 100%
-  );
+}
+
+.home-hero-realistic .hero-text {
+  max-width: 520px;
+}
+
+.home-hero-realistic h1 {
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+}
+
+.tap-rack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(clamp(28px, 5.2vw, 58px), 1fr));
+  gap: clamp(0.45rem, 1vw, 0.95rem);
+  align-items: end;
+  min-height: clamp(230px, 29vw, 310px);
+  padding: 0 clamp(0.5rem, 1.8vw, 1.25rem) clamp(3.2rem, 5.5vw, 4.2rem);
+}
+
+.tap-rack::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.1rem;
+  height: clamp(62px, 8vw, 86px);
+  border: 1px solid #1d1d1d;
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 45%),
+    linear-gradient(90deg, #171717, #262626 18%, #111 50%, #282828 82%, #141414);
   box-shadow:
-    0 0 8px 2px var(--color),
-    0 0 22px 6px var(--color);
-  filter: saturate(1.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 34px rgba(0, 0, 0, 0.38);
+}
+
+.tap-handle {
+  --tap-color: #777;
   position: relative;
   z-index: 1;
-}
-
-/* Tall cylindrical handle body — the branded grip */
-.tap-body {
-  width: 20px;
-  height: 100px;
-  border-radius: 2px 2px 3px 3px;
-  background:
-    linear-gradient(to right,
-      rgba(0, 0, 0, 0.45) 0%,
-      rgba(255, 255, 255, 0.22) 22%,
-      rgba(255, 255, 255, 0.08) 45%,
-      rgba(0, 0, 0, 0.2) 100%
-    ),
-    var(--color);
-  box-shadow:
-    inset 1px 0 3px rgba(255, 255, 255, 0.12),
-    0 0 18px -6px var(--color);
-  position: relative;
-}
-
-/* Horizontal accent bands etched into the body */
-.tap-body::before,
-.tap-body::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.18);
-}
-.tap-body::before { top: 10px; }
-.tap-body::after  { bottom: 10px; }
-
-/* Narrow chrome collar — connects body to faucet */
-.tap-collar {
-  width: 14px;
-  height: 12px;
-  background: linear-gradient(to bottom, #707070, #909090 40%, #585858);
-  border-radius: 2px;
-}
-
-/* Chunky faucet housing — the metallic block that mounts on the tower */
-.tap-faucet {
-  width: 28px;
-  height: 18px;
-  background: linear-gradient(to bottom, #686868, #484848 60%, #383838);
-  border-radius: 3px 3px 2px 2px;
-  position: relative;
-}
-
-/* Downward spout — where the beer actually flows */
-.tap-spout {
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 16px;
-  background: linear-gradient(to right, #3a3a3a, #5e5e5e, #3a3a3a);
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-.tap-label {
-  margin-top: 1.2rem;
-  font-size: 0.52rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* ==========================================================================
-   BEERS ROW — Realistic pint glass renderings
-   Each .pint-wrap receives --beer-color via inline style.
-   Structure: glass clip-path with beer fill + foam head + glass glare highlights
-   ========================================================================== */
-
-.beers-row {
+  height: clamp(170px, 22vw, 224px);
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  gap: 1.4rem;
-  padding: 2.5rem 3rem 3.5rem;
-  border-top: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.18);
+  align-items: flex-start;
+  padding-top: clamp(40px, 6vw, 58px);
+  color: var(--text);
+  isolation: isolate;
 }
 
-/* Wrapper handles hover lift and drop-shadow glow */
-.pint-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.7rem;
-  transition: transform 0.22s ease;
-}
-
-.pint-wrap:hover {
-  transform: translateY(-5px);
-}
-
-/* The glass — clip-path creates the classic pint taper (wide top, narrow bottom).
-   filter drop-shadow follows the clip-path outline for the colored glow. */
-.pint-glass {
-  width: 58px;
-  height: 80px;
-  clip-path: polygon(6% 0%, 94% 0%, 86% 100%, 14% 100%);
-  position: relative;
-  filter:
-    drop-shadow(0 0  1px rgba(255, 255, 255, 0.12))
-    drop-shadow(0 6px 18px var(--beer-color));
-}
-
-/* Beer fill — the liquid inside the glass */
-.pint-beer {
-  position: absolute;
-  top: 20%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--beer-color);
-  opacity: 0.92;
-}
-
-/* Foam head — cream/off-white layer at the top */
-.pint-foam {
+.tap-handle::before {
+  content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 22%;
-  background: linear-gradient(to bottom,
-    rgba(255, 252, 240, 0.98) 0%,
-    rgba(238, 224, 196, 0.88) 70%,
-    rgba(228, 212, 178, 0.72) 100%
-  );
+  width: clamp(28px, 4.3vw, 52px);
+  height: clamp(116px, 15.6vw, 158px);
+  border: 1px solid #121212;
+  border-radius: clamp(10px, 1.5vw, 16px) clamp(10px, 1.5vw, 16px) 5px 5px;
+  clip-path: polygon(13% 0, 87% 0, 76% 100%, 24% 100%);
+  background:
+    radial-gradient(circle at 50% 18%, var(--tap-color) 0 24%, #151515 25% 38%, transparent 39%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.11), transparent 32%, rgba(0, 0, 0, 0.45)),
+    #242424;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 11px 18px rgba(0, 0, 0, 0.46);
 }
 
-/* Glass glare — thin vertical highlights that simulate refracted light */
-.pint-glare {
-  position: absolute;
-  top: 5%;
-  bottom: 5%;
-  left: 10%;
-  width: 9%;
-  background: linear-gradient(to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.24) 50%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
-  border-radius: 3px;
-}
-
-/* Second thin glare on the right side */
-.pint-glare::after {
+.tap-handle::after {
   content: '';
   position: absolute;
-  top: 15%;
-  bottom: 15%;
-  left: 400%;
-  width: 40%;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
+  bottom: 2px;
+  left: 50%;
+  width: clamp(7px, 1vw, 10px);
+  height: clamp(62px, 8vw, 86px);
+  transform: translateX(-50%);
+  background:
+    linear-gradient(90deg, #171717, #8a8a8a 48%, #1b1b1b);
+  border-radius: 6px 6px 3px 3px;
+  box-shadow:
+    0 clamp(-30px, -3vw, -20px) 0 -2px #3a3a3a,
+    0 clamp(-23px, -2.4vw, -16px) 0 clamp(6px, 0.9vw, 9px) rgba(20, 20, 20, 0.96),
+    0 clamp(-23px, -2.4vw, -16px) 0 clamp(8px, 1.1vw, 11px) rgba(120, 120, 120, 0.28);
 }
 
-.beer-name {
-  font-size: 0.52rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+.tap-handle span {
+  display: none;
+}
+
+.home-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+
+.home-link-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 170px;
+  padding: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--bg);
+  transition: background 0.2s ease;
+}
+
+.home-link-block:hover {
+  background: var(--surface);
+}
+
+.home-link-block span {
   color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
 }
 
-/* Center the footer on the homepage */
-body.homepage footer {
-  justify-content: center;
-  gap: 1.5rem;
+.home-link-block strong {
+  max-width: 280px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-/* ==========================================================================
-   HOMEPAGE — Mobile
-   ========================================================================== */
+@media (max-width: 1180px) {
+  .home-hero-realistic {
+    grid-template-columns: minmax(88px, 120px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .tap-rack {
+    grid-column: 1 / -1;
+    width: min(100%, 820px);
+    margin: 0 auto;
+  }
+}
 
 @media (max-width: 720px) {
-  .header-inner {
-    padding: 1rem 1.5rem;
+  body.homepage.nav-open,
+  body.homepage header.nav-open {
     position: relative;
   }
 
-  .hero-concept {
-    flex-direction: column;
-    padding: 2.5rem 1.5rem 2rem;
+  body.homepage nav {
+    background: var(--bg);
+  }
+
+  .home-hero-realistic {
+    display: flex;
     gap: 2rem;
-    min-height: auto;
-    align-items: flex-start;
+    padding: 3rem 1.5rem 2.5rem;
   }
 
-  .hero-left {
-    flex: none;
-    max-width: 100%;
+  .home-hero-realistic .logo-hero {
+    width: 112px;
+    height: 112px;
   }
 
-  .hero-right {
+  .tap-rack {
     width: 100%;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    justify-content: flex-start;
+    grid-template-columns: repeat(8, minmax(28px, 1fr));
+    min-height: 210px;
+    padding: 0 0.35rem 3.4rem;
+    overflow: visible;
   }
 
-  .taps-row {
-    gap: 0.6rem;
-    padding-right: 1.5rem;
-  }
-
-  .tap-cap  { width: 16px; height: 16px; }
-  .tap-body { width: 14px; height: 68px; }
-  .tap-collar { width: 10px; height: 9px; }
-  .tap-faucet { width: 20px; height: 14px; }
-  .tap-spout  { width: 6px; height: 11px; bottom: -11px; }
-
-  .beers-row {
-    gap: 0.75rem;
-    padding: 2rem 1.5rem 2.5rem;
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .pint-glass { width: 42px; height: 58px; }
-
-  body.homepage footer {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
+  .home-link-grid {
+    grid-template-columns: 1fr;
   }
 }

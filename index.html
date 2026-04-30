@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plain-O Brewing</title>
+  <meta name="description" content="Plain-O Brewing Co. in Plano, TX. Simple names, honest pints, and color-coded beers brewed for easy ordering." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -40,7 +41,7 @@
         <a href="pages/contact.html">Contact</a>
       </nav>
     </div>
-    <div class="header-stripe">
+    <div class="header-stripe" aria-hidden="true">
       <span style="background:#3b5fa0;"></span>
       <span style="background:#4a8c5c;"></span>
       <span style="background:#c0392b;"></span>
@@ -53,165 +54,62 @@
   </header>
 
   <main>
+    <section class="hero home-hero-realistic">
+      <img class="logo-hero" src="favicon.svg" alt="Plain-O Brewing Co. mark" />
 
-    <div class="hero-concept">
-      <div class="hero-left">
+      <div class="hero-text">
         <h1>Beer doesn't need a story. Just a color.</h1>
-        <p>Simple names, honest pints.</p>
-        <a href="pages/taplist.html" class="btn">Explore the Colors &rarr;</a>
-      </div>
-      <div class="hero-right">
-        <div class="taps-row">
-
-          <div class="tap-unit" style="--color:#3b5fa0;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Blue</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#4a8c5c;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Green</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#c0392b;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Red</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#e8c84a;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Yellow</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#e87b2a;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Orange</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#8b5e9e;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Purple</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#b0a090;">
-            <div class="tap-cap"></div>
-            <div class="tap-body"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Tan</span>
-          </div>
-
-          <div class="tap-unit" style="--color:#484848;">
-            <div class="tap-cap" style="box-shadow: 0 0 10px 2px #666, 0 0 24px 6px #444; border: 1px solid #666;"></div>
-            <div class="tap-body" style="border: 1px solid #555;"></div>
-            <div class="tap-collar"></div>
-            <div class="tap-faucet"><div class="tap-spout"></div></div>
-            <span class="tap-label">Black</span>
-          </div>
-
+        <p>Simple names, honest pints. Eight taps, eight colors, no guessing.</p>
+        <div class="hero-cta">
+          <a href="pages/taplist.html" class="btn">Explore the Colors &rarr;</a>
         </div>
       </div>
+
+      <div class="tap-rack" aria-label="Plain-O Brewing color taps">
+        <div class="tap-handle" style="--tap-color:#3b5fa0;" aria-label="Blue tap"></div>
+        <div class="tap-handle" style="--tap-color:#4a8c5c;" aria-label="Green tap"></div>
+        <div class="tap-handle" style="--tap-color:#c0392b;" aria-label="Red tap"></div>
+        <div class="tap-handle" style="--tap-color:#e8c84a;" aria-label="Yellow tap"></div>
+        <div class="tap-handle" style="--tap-color:#e87b2a;" aria-label="Orange tap"></div>
+        <div class="tap-handle" style="--tap-color:#8b5e9e;" aria-label="Purple tap"></div>
+        <div class="tap-handle" style="--tap-color:#b0a090;" aria-label="Tan tap"></div>
+        <div class="tap-handle" style="--tap-color:#1a1a1a;" aria-label="Black tap"></div>
+      </div>
+    </section>
+
+    <div class="color-row" aria-hidden="true">
+      <span style="background:#3b5fa0;"></span>
+      <span style="background:#4a8c5c;"></span>
+      <span style="background:#c0392b;"></span>
+      <span style="background:#e8c84a;"></span>
+      <span style="background:#e87b2a;"></span>
+      <span style="background:#8b5e9e;"></span>
+      <span style="background:#b0a090;"></span>
+      <span style="background:#1a1a1a;"></span>
     </div>
 
-    <div class="beers-row">
-
-      <div class="pint-wrap" style="--beer-color:#3b5fa0;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Blue</span>
+    <section>
+      <h2>Start Here</h2>
+      <div class="home-link-grid">
+        <a href="pages/taplist.html" class="home-link-block">
+          <span>Taplist</span>
+          <strong>See what's pouring now.</strong>
+        </a>
+        <a href="pages/events.html" class="home-link-block">
+          <span>Events</span>
+          <strong>Find trivia, music, and taproom nights.</strong>
+        </a>
+        <a href="pages/contact.html" class="home-link-block">
+          <span>Visit</span>
+          <strong>Hours, address, and contact info.</strong>
+        </a>
       </div>
-
-      <div class="pint-wrap" style="--beer-color:#4a8c5c;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Green</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#c0392b;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Red</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#e8c84a;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Yellow</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#e87b2a;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Orange</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#8b5e9e;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Purple</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#b0a090;">
-        <div class="pint-glass">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Tan</span>
-      </div>
-
-      <div class="pint-wrap" style="--beer-color:#444;">
-        <div class="pint-glass" style="filter: drop-shadow(0 0 12px #555);">
-          <div class="pint-beer"></div>
-          <div class="pint-foam"></div>
-          <div class="pint-glare"></div>
-        </div>
-        <span class="beer-name">Black</span>
-      </div>
-
-    </div>
-
+    </section>
   </main>
 
   <footer>
-    <span>Simple names, honest pints.</span>
-    <span>Est. 2023 &middot; Plano, TX</span>
+    <span>Plain-O Brewing Co.</span>
+    <span>Drink simple.</span>
   </footer>
 
   <script src="js/nav.js"></script>
