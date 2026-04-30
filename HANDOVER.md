@@ -199,32 +199,13 @@ The `CNAME` file contains `plainobrewing.com`. The DNS records at the domain reg
 Latest commit on `main`:
 
 ```bash
-62f1ac1 Refine homepage taps and shared header
+c72449c Simplify hero tagline and add handover doc
 ```
 
 What changed in that commit:
 
-- Reworked the homepage hero to keep the existing site format while using more realistic CSS beer taps.
-- Removed visible names from the tap handles while keeping accessible labels.
-- Swapped the homepage hero mark to `favicon.svg` to avoid the PNG background mismatch.
-- Added fluid sizing to the tap rack/handles so the hero stacks more cleanly.
-- Restored the rainbow stripe and top-left logo/tagline header across `index.html` and all pages under `pages/`.
-
-Validation run after the changes:
-
-```bash
-git diff --check
-node local HTML reference check: 58 checked, 0 missing
-curl -I http://127.0.0.1:4173/index.html
-curl -I http://127.0.0.1:4173/pages/taplist.html
-curl -I http://127.0.0.1:4173/pages/events.html
-curl -I http://127.0.0.1:4173/pages/about.html
-curl -I http://127.0.0.1:4173/pages/contact.html
-```
-
-All checked pages returned `200 OK` from the local static server.
-
-Current git note: `HANDOVER.md` itself is untracked unless the next agent/user stages and commits it.
+- Trimmed the homepage hero subheading from "Simple names, honest pints. Eight taps, eight colors, no guessing." to just "Simple names, honest pints."
+- Added `HANDOVER.md` (this file) to the repo.
 
 ---
 
